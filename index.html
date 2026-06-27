@@ -675,7 +675,7 @@
 <footer>
   <p>
     肌肉记忆 &nbsp;·&nbsp; MuscleMemo &nbsp;·&nbsp;
-    <a href="https://github.com/meatbagpro/musclememo" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/meatbagpro/musclememo" target="_blank" rel="noopener noreferrer">GitHub</a>
   </p>
   <p style="margin-top:0.4rem">专为那个「自称内向」却让所有人如沐春风的朋友而作 💪</p>
 </footer>
@@ -685,13 +685,18 @@
   const emojis = ['💪','🧠','🤝','😎','🗣️','✨','🎤','☕','🎉','🔥'];
   const container = document.getElementById('floaters');
 
+  const MIN_FLOAT_DURATION = 8;
+  const FLOAT_DURATION_RANGE = 8;
+  const MAX_FLOAT_DELAY = 15;
+  const TIMELINE_STAGGER_DELAY = 150;
+
   for (let i = 0; i < 18; i++) {
     const el = document.createElement('div');
     el.className = 'floater';
     el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
     el.style.left = Math.random() * 100 + 'vw';
-    el.style.animationDuration = (8 + Math.random() * 8) + 's';
-    el.style.animationDelay = (Math.random() * 15) + 's';
+    el.style.animationDuration = (MIN_FLOAT_DURATION + Math.random() * FLOAT_DURATION_RANGE) + 's';
+    el.style.animationDelay = (Math.random() * MAX_FLOAT_DELAY) + 's';
     container.appendChild(el);
   }
 
@@ -709,7 +714,7 @@
 
         // Trigger timeline items
         entry.target.querySelectorAll('.tl-item').forEach((item, idx) => {
-          setTimeout(() => item.classList.add('visible'), idx * 150);
+          setTimeout(() => item.classList.add('visible'), idx * TIMELINE_STAGGER_DELAY);
         });
       }
     });
